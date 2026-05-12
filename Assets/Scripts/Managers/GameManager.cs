@@ -1,18 +1,33 @@
-using GameJam;
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GameJam
 {
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
+        public static event Action<int> OnTargetLostLivesUpdated = delegate { };
+        public static event Action<int> OnGameOver = delegate { };
 
         [Header("Stats")]
         [SerializeField] private int targetLostLives = 10;
 
         [Header("Debug, don't touch")]
-        [SerializeField] private int _savedLives;
+        [SerializeField] private int savedLives;
         [SerializeField] private int currentLostLives = 0;
+
+        public int CurrentLostLives
+        {
+            get => currentLostLives;
+            private set
+            {
+                currentLostLives = value;
+                OnTargetLostLivesUpdated?.Invoke(currentLostLives);
+            }
+        }
+
+        public int TargetLostLives => targetLostLives;
 
         private void Awake()
         {
@@ -24,33 +39,46 @@ namespace GameJam
             Instance = this;
 
             Entity.OnEntitiesCollided += HandleEntitiesAccident;
-        }
+            SceneManager.sceneLoaded += ResetTimeScale;
+            SceneManager.sceneUnloaded += ResetTimeScale;
+        }       
 
         private void Start()
         {
-            _savedLives = 0;
-            currentLostLives = 0;
+            savedLives = 0;
+            CurrentLostLives = 0;
         }
 
         private void OnDestroy()
         {
             Entity.OnEntitiesCollided -= HandleEntitiesAccident;
+            SceneManager.sceneLoaded -= ResetTimeScale;
+            SceneManager.sceneUnloaded -= ResetTimeScale;
         }
 
         private void HandleEntitiesAccident(int entityLives)
         {
-            currentLostLives += entityLives;
-            if(currentLostLives >= targetLostLives)
+            CurrentLostLives += entityLives;
+            if(CurrentLostLives >= TargetLostLives)
             {
-                Debug.Log("Game Over!");
-                // Implement game over logic here (e.g., show game over screen, restart level, etc.)
+                Time.timeScale = 0f;
+                OnGameOver?.Invoke(savedLives);
             }
+        }
+        private void ResetTimeScale(Scene arg0)
+        {
+            Time.timeScale = 1f;
+        }
+
+        private void ResetTimeScale(Scene arg0, LoadSceneMode arg1)
+        {
+            Time.timeScale = 1f;
         }
 
         public void RegisterSavedEntity(Entity entity)
         {
-            _savedLives += entity.Lives;
-            Debug.Log($"Vite salvate: {_savedLives}");
+            savedLives += entity.Lives;
+            Debug.Log($"Vite salvate: {savedLives}");
         }
     }
 }
