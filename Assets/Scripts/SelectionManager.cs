@@ -1,38 +1,74 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace GameJam
-{
+{ 
     public class SelectionManager : MonoBehaviour
     {
-        [SerializeField] private Camera mainCamera;
-        [SerializeField] private LayerMask selectionLayerMask;
+        [Header("Input")]
+        [SerializeField] private InputActionReference selectAction;
+        [SerializeField] private InputActionReference deselectAction;
 
-        private ISelectable currentSelection;
+        [Header("Raycast")]
+        [SerializeField] private Camera gameplayCamera;
+        [SerializeField] private LayerMask selectionLayerMask;
+        [SerializeField] private float raycastDistance = 1000f;
+        [SerializeField] private int maxSelectionAmount = 3;
+
+        private List<ISelectable> currentSelectionList;
 
         private void Awake()
         {
-            if (mainCamera == null)
+            if (gameplayCamera == null)
             {
-                mainCamera = Camera.main;
+                gameplayCamera = Camera.main;
             }
         }
 
-        private void Update()
+        private void Start()
         {
-            if (!Mouse.current.leftButton.wasPressedThisFrame)
-            {
-                return;
-            }
+            currentSelectionList = new();
+        }
 
+        private void OnEnable()
+        {
+            selectAction.action.performed += OnSelectPerformed;
+            deselectAction.action.performed += OnDeselectPerformed;
+
+            selectAction.action.Enable();
+            deselectAction.action.Enable();
+        }
+
+        private void OnDisable()
+        {
+            selectAction.action.performed -= OnSelectPerformed;
+            deselectAction.action.performed -= OnDeselectPerformed;
+
+            selectAction.action.Disable();
+            deselectAction.action.Disable();
+        }
+
+        private void OnSelectPerformed(InputAction.CallbackContext context)
+        {
             TrySelectObject();
+        }
+
+        private void OnDeselectPerformed(InputAction.CallbackContext context)
+        {
+            ClearSelection();
         }
 
         private void TrySelectObject()
         {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            if(currentSelectionList.Count >= maxSelectionAmount)
+            {
+                return;
+            }
+            Vector2 mousePosition = Mouse.current.position.ReadValue();
+            Ray ray = gameplayCamera.ScreenPointToRay(mousePosition);
 
-            if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, selectionLayerMask))
+            if (!Physics.Raycast(ray, out RaycastHit hit, raycastDistance, selectionLayerMask))
             {
                 ClearSelection();
                 return;
@@ -44,26 +80,27 @@ namespace GameJam
                 return;
             }
 
-            if (currentSelection == selectable)
+            if (currentSelectionList.Contains(selectable))
             {
                 return;
             }
 
-            ClearSelection();
-
-            currentSelection = selectable;
-            currentSelection.Select();
+            currentSelectionList.Add(selectable);
+            selectable.Select();
         }
 
         private void ClearSelection()
         {
-            if (currentSelection == null)
+            if (currentSelectionList == null)
             {
                 return;
             }
 
-            currentSelection.Deselect();
-            currentSelection = null;
+            foreach (var selectable in currentSelectionList)
+            {
+                selectable.Deselect();
+            }
+            currentSelectionList.Clear();
         }
     }
 }
