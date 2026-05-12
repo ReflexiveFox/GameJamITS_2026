@@ -2,17 +2,19 @@ using UnityEngine;
 
 namespace GameJam
 {
-    [RequireComponent(typeof(Outline))]
     public abstract class SelectableEntity : MonoBehaviour, ISelectable
     {
         [SerializeField] private bool isSelected;
-        private Outline outline;
+        [SerializeField] private Outline outline;
 
         public bool IsSelected => isSelected;
 
         private void Awake()
         {
-            outline = GetComponent<Outline>();
+            if (outline == null)
+            {
+                Debug.LogError($"Outline component is not assigned into inspector!", this);
+            }
         }
 
         public virtual void Select()
