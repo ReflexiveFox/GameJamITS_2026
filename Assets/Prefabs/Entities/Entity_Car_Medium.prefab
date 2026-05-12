@@ -192,36 +192,16 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 156582348073255995, guid: 0d3fecc0a72fea644817b2287092d0e9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7657380318670572061}
+      addedObject: {fileID: 8384381696734010493}
     - targetCorrespondingSourceObject: {fileID: 156582348073255995, guid: 0d3fecc0a72fea644817b2287092d0e9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8384381696734010493}
+      addedObject: {fileID: 7657380318670572061}
   m_SourcePrefab: {fileID: 100100000, guid: 0d3fecc0a72fea644817b2287092d0e9, type: 3}
 --- !u!1 &3701284611100952784 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 156582348073255995, guid: 0d3fecc0a72fea644817b2287092d0e9, type: 3}
   m_PrefabInstance: {fileID: 3562857954217168107}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7657380318670572061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3701284611100952784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae8b8de14d2f8b34fb14ece732207c9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameJam.Vehicle
-  outline: {fileID: 2744587336225338909}
-  isSelected: 0
-  increaseTimeAction: {fileID: -8069266222520763899, guid: d30d020909ccf2d4499630a6803dee37, type: 3}
-  decreaseTimeAction: {fileID: -5643866219403781520, guid: d30d020909ccf2d4499630a6803dee37, type: 3}
-  timeFactor: 1
-  lives: 1
-  baseSpeed: 2
-  currentTimeState: 1
 --- !u!65 &8384381696734010493
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -243,6 +223,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.3197824, y: 1.1172307, z: 3.3776839}
   m_Center: {x: 0.000000059604645, y: 0.5563599, z: 0.026877284}
+--- !u!114 &7657380318670572061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3701284611100952784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8b8de14d2f8b34fb14ece732207c9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameJam.Vehicle
+  outline: {fileID: 2744587336225338909}
+  isSelected: 0
+  increaseTimeAction: {fileID: -8069266222520763899, guid: d30d020909ccf2d4499630a6803dee37, type: 3}
+  decreaseTimeAction: {fileID: -5643866219403781520, guid: d30d020909ccf2d4499630a6803dee37, type: 3}
+  timeFactor: 1
+  lives: 1
+  baseSpeed: 2
+  currentTimeState: 1
 --- !u!4 &6860152731639589701 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7946030890189563822, guid: 0d3fecc0a72fea644817b2287092d0e9, type: 3}
