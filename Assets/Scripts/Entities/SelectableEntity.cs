@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace GameJam
@@ -5,6 +6,8 @@ namespace GameJam
     [RequireComponent(typeof(Collider))]
     public abstract class SelectableEntity : MonoBehaviour, ISelectable
     {
+        public static event Action OnAnyEntityDestroyed = delegate{};
+
         [Header("SELECTABLE ENTITY SETTINGS")]
         [Header("References")]
         [SerializeField] private Outline outline;

@@ -24,6 +24,8 @@ namespace GameJam
             {
                 gameplayCamera = Camera.main;
             }
+
+            SelectableEntity.OnAnyEntityDestroyed += UpdateSelectionList;
         }
 
         private void Start()
@@ -49,6 +51,11 @@ namespace GameJam
             deselectAction.action.Disable();
         }
 
+        private void OnDestroy()
+        {
+            SelectableEntity.OnAnyEntityDestroyed -= UpdateSelectionList;
+        }
+
         private void OnSelectPerformed(InputAction.CallbackContext context)
         {
             TrySelectObject();
@@ -57,6 +64,18 @@ namespace GameJam
         private void OnDeselectPerformed(InputAction.CallbackContext context)
         {
             ClearSelection();
+        }
+
+        private void UpdateSelectionList()
+        {
+            foreach (var selectable in currentSelectionList)
+            {
+                if (selectable == null)
+                {
+                    currentSelectionList.Remove(selectable);
+                    break;
+                }
+            }
         }
 
         private void TrySelectObject()

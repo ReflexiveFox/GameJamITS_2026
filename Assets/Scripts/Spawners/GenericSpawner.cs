@@ -6,7 +6,8 @@ namespace GameJam
     {
         [Header("Spawner Settings")]
         [SerializeField] private Entity prefab;
-        [SerializeField] private float spawnInterval = 2f;
+        [SerializeField] private float minSpawnInterval = 3f;
+        [SerializeField] private float maxSpawnInterval = 5f;
         [SerializeField] private int spawnCount = 1;
         [Header("Spawn Area Settings")]
         [Header("Horizontal Spawn Offset")]
@@ -17,17 +18,30 @@ namespace GameJam
         [SerializeField] private float maxZSpawnOffset = .5f;
 
         private float _timer;
+        private float currentSpawnInterval;
+
+        private void Start()
+        {
+            UpdateSpawnInterval();
+        }
 
         private void Update()
         {
             _timer += Time.deltaTime;
 
-            if (_timer >= spawnInterval)
+            if (_timer >= currentSpawnInterval)
             {
                 Spawn();
                 _timer = 0f;
+                UpdateSpawnInterval();
             }
         }
+
+        private void UpdateSpawnInterval()
+        {
+            currentSpawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
+        }
+
         private void Spawn()
         {
             for (int i = 0; i < spawnCount; i++)

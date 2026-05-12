@@ -8,13 +8,14 @@ namespace GameJam
     {
         public static GameManager Instance { get; private set; }
         public static event Action<int> OnTargetLostLivesUpdated = delegate { };
+        public static event Action<int> OnSavedLivesUpdated = delegate { };
         public static event Action<int> OnGameOver = delegate { };
 
         [Header("Stats")]
         [SerializeField] private int targetLostLives = 10;
 
         [Header("Debug, don't touch")]
-        [SerializeField] private int savedLives;
+        [SerializeField] private int currentSavedLives;
         [SerializeField] private int currentLostLives = 0;
 
         public int CurrentLostLives
@@ -28,6 +29,16 @@ namespace GameJam
         }
 
         public int TargetLostLives => targetLostLives;
+
+        public int CurrentSavedLives 
+        {
+            get => currentSavedLives;
+            set
+            {
+                currentSavedLives = value;
+                OnSavedLivesUpdated?.Invoke(currentSavedLives);
+            }
+        }
 
         private void Awake()
         {
@@ -45,7 +56,7 @@ namespace GameJam
 
         private void Start()
         {
-            savedLives = 0;
+            CurrentSavedLives = 0;
             CurrentLostLives = 0;
         }
 
@@ -62,7 +73,7 @@ namespace GameJam
             if(CurrentLostLives >= TargetLostLives)
             {
                 Time.timeScale = 0f;
-                OnGameOver?.Invoke(savedLives);
+                OnGameOver?.Invoke(CurrentSavedLives);
             }
         }
         private void ResetTimeScale(Scene arg0)
@@ -77,8 +88,8 @@ namespace GameJam
 
         public void RegisterSavedEntity(Entity entity)
         {
-            savedLives += entity.Lives;
-            Debug.Log($"Vite salvate: {savedLives}");
+            CurrentSavedLives += entity.Lives;
+            Debug.Log($"Vite salvate: {CurrentSavedLives}");
         }
     }
 }
