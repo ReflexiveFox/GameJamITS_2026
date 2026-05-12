@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8661938630787878500}
   - component: {fileID: 4231165928495295342}
   - component: {fileID: 1977778737403931744}
+  - component: {fileID: 3688401281133706698}
   m_Layer: 6
   m_Name: Test_Car
   m_TagString: Untagged
@@ -128,6 +129,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameJam.Vehicle
   isSelected: 0
   timeFactor: 0
+--- !u!114 &3688401281133706698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4264519747488095517}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 1
+  outlineColor: {r: 0.044828374, g: 0.005574857, b: 0.98490566, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &6507321172967155810
 GameObject:
   m_ObjectHideFlags: 0
