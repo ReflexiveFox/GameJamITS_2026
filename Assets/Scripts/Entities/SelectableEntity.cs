@@ -2,14 +2,19 @@ using UnityEngine;
 
 namespace GameJam
 {
+    [RequireComponent(typeof(Collider))]
     public abstract class SelectableEntity : MonoBehaviour, ISelectable
     {
-        [SerializeField] private bool isSelected;
+        [Header("SELECTABLE ENTITY SETTINGS")]
+        [Header("References")]
         [SerializeField] private Outline outline;
+
+        [Header("Selection State")]
+        [SerializeField] private bool isSelected;
 
         public bool IsSelected => isSelected;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (outline == null)
             {
