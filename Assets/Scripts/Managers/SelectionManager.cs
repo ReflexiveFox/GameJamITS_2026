@@ -63,7 +63,7 @@ namespace GameJam
 
         private void OnDeselectPerformed(InputAction.CallbackContext context)
         {
-            ClearSelection();
+            ClearWholeSelection();
         }
 
         private void UpdateSelectionList()
@@ -89,13 +89,13 @@ namespace GameJam
 
             if (!Physics.Raycast(ray, out RaycastHit hit, raycastDistance, selectionLayerMask))
             {
-                ClearSelection();
+                ClearWholeSelection();
                 return;
             }
 
             if (!hit.collider.TryGetComponent(out ISelectable selectable))
             {
-                ClearSelection();
+                ClearWholeSelection();
                 return;
             }
 
@@ -107,7 +107,7 @@ namespace GameJam
             selectable.Select();
         }
 
-        private void ClearSelection()
+        private void ClearWholeSelection()
         {
             if (currentSelectionList == null)
             {
