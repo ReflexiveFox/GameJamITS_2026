@@ -77,11 +77,23 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
+      propertyPath: entitiesToSpawn.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
       propertyPath: prefabsToSpawn.Array.data[0].amountToSpawn
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
       propertyPath: prefabsToSpawn.Array.data[0].prefabToSpawn
+      value: 
+      objectReference: {fileID: 9134368577131574803, guid: 691b9294529e36c499156dcbbb11cd1d, type: 3}
+    - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
+      propertyPath: entitiesToSpawn.Array.data[0].amountToSpawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
+      propertyPath: entitiesToSpawn.Array.data[0].prefabToSpawn
       value: 
       objectReference: {fileID: 9134368577131574803, guid: 691b9294529e36c499156dcbbb11cd1d, type: 3}
     m_RemovedComponents: []
