@@ -117,7 +117,7 @@ namespace GameJam
 
             foreach (var selectable in currentSelectionList)
             {
-                selectable.Deselect();
+                selectable?.Deselect();
             }
             currentSelectionList.Clear();
         }

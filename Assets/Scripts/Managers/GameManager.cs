@@ -81,6 +81,7 @@ namespace GameJam
         // This method can be called from a UI button of tutorial to start the gameplay.
         public void StartGame()
         {
+            canListenPause = true;
             OnGameStarted?.Invoke();
         }
 

@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameJam.TimeState
   Slow: 0.5
   Normal: 1
-  Fast: 2
+  Fast: 5

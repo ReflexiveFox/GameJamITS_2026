@@ -46,10 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameJam.GameManager
   pauseAction: {fileID: -2966436623383225946, guid: d30d020909ccf2d4499630a6803dee37, type: 3}
-  targetLostLives: 10
+  targetLostLives: 30
   currentSavedLives: 0
   currentLostLives: 0
-  isPaused: 0
+  _isPaused: 0
+  canListenPause: 0
 --- !u!114 &548158989465971993
 MonoBehaviour:
   m_ObjectHideFlags: 0

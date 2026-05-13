@@ -239,10 +239,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameJam.Vehicle
   outline: {fileID: 869389208862441772}
   isSelected: 0
-  increaseTimeAction: {fileID: -8069266222520763899, guid: d30d020909ccf2d4499630a6803dee37, type: 3}
-  decreaseTimeAction: {fileID: -5643866219403781520, guid: d30d020909ccf2d4499630a6803dee37, type: 3}
+  increaseTimeAction: {fileID: -5643866219403781520, guid: d30d020909ccf2d4499630a6803dee37, type: 3}
+  decreaseTimeAction: {fileID: -8069266222520763899, guid: d30d020909ccf2d4499630a6803dee37, type: 3}
   timeFactor: 1
-  minLives: 1
-  maxLives: 1
+  currentLives: 2
   baseSpeed: 2
   currentTimeState: 1
