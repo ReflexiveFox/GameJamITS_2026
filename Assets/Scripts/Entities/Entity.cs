@@ -59,8 +59,9 @@ namespace GameJam
             Move();
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
             increaseTimeAction.action.performed -= OnIncreaseTimePerformed;
             decreaseTimeAction.action.performed -= OnDecreaseTimePerformed;
         }

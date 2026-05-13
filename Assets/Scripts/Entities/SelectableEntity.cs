@@ -25,6 +25,12 @@ namespace GameJam
             }
         }
 
+        protected virtual void OnDestroy()
+        {
+            OnAnyEntityDestroyed?.Invoke();
+        }
+
+
         public virtual void Select()
         {
             isSelected = true;

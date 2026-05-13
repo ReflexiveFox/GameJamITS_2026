@@ -16,7 +16,7 @@ namespace GameJam
         [SerializeField] private float raycastDistance = 1000f;
         [SerializeField] private int maxSelectionAmount = 3;
 
-        private List<ISelectable> currentSelectionList;
+        [SerializeField] private List<SelectableEntity> currentSelectionList;
 
         private void Awake()
         {
@@ -68,15 +68,7 @@ namespace GameJam
 
         private void UpdateSelectionList()
         {
-            foreach (var selectable in currentSelectionList)
-            {
-                if (selectable == null)
-                {
-                    Debug.Log("Removed null reference from selection list.");
-                    currentSelectionList.Remove(selectable);
-                    break;
-                }
-            }
+            currentSelectionList.RemoveAll(item => item == null);
         }
 
         private void TrySelectObject()
@@ -94,7 +86,7 @@ namespace GameJam
                 return;
             }
 
-            if (!hit.collider.TryGetComponent(out ISelectable selectable))
+            if (!hit.collider.TryGetComponent(out SelectableEntity selectable))
             {
                 ClearWholeSelection();
                 return;
