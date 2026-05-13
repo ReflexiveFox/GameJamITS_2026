@@ -23,7 +23,7 @@ namespace GameJam
 
         [Header("Stats")]
         [SerializeField] private float timeFactor;
-        [SerializeField] private int lives = 1;
+        [SerializeField] private int currentLives = 1;
         [SerializeField] private float baseSpeed = 2f;
 
         [Header("Debug Info")]
@@ -31,7 +31,7 @@ namespace GameJam
 
         private Rigidbody _rb;
 
-        public int Lives => lives;
+        public int Lives => currentLives;
 
         public TimeState.TimeStateEnum CurrentTimeState
         {
