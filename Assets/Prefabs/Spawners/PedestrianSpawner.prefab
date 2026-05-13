@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 5470963581316023048, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
       propertyPath: m_Name
-      value: PedestrianSpawner_SL Variant
+      value: PedestrianSpawner
       objectReference: {fileID: 0}
     - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
       propertyPath: prefab
@@ -63,6 +63,14 @@ PrefabInstance:
     - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
       propertyPath: spawnCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
+      propertyPath: maxSpawnInterval
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
+      propertyPath: minSpawnInterval
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
