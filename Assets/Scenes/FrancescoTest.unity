@@ -2735,6 +2735,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6014060896305743535, guid: 67c81395f3c90204085b59d9d553ce94, type: 3}
+      propertyPath: ambienceClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b7ee6da155cc445429670dd744a2b470, type: 3}
+    - target: {fileID: 6014060896305743535, guid: 67c81395f3c90204085b59d9d553ce94, type: 3}
+      propertyPath: ambienceVolume
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014060896305743535, guid: 67c81395f3c90204085b59d9d553ce94, type: 3}
+      propertyPath: vehicleCrashVolume
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014060896305743535, guid: 67c81395f3c90204085b59d9d553ce94, type: 3}
+      propertyPath: pedestrianImpactVolume
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6861736881259833339, guid: 67c81395f3c90204085b59d9d553ce94, type: 3}
       propertyPath: m_Name
       value: AudioGameManager

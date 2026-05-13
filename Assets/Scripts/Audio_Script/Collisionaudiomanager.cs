@@ -149,7 +149,7 @@ namespace GameJam
             // in corso. Se due entità arrivano in contemporanea i suoni si sovrappongono
             // brevemente — accettabile perché sono suoni positivi di breve durata.
             var clip = Pick(savedClips, "SAVED", savedLives.ToString());
-            if (clip == null) return;
+            if (clip == null || savedLives<=0) return;
             _savedSource.PlayOneShot(clip, savedVolume);
             Debug.Log($"[CollisionAudio] 🎉 SAVED | '{clip.name}' | vite salvate: {savedLives}");
         }
