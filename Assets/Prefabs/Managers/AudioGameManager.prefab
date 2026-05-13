@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &151542623000850993
+--- !u!1 &6861736881259833339
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7341937484141452424}
-  - component: {fileID: 5202378030575724044}
+  - component: {fileID: 3018976489637166824}
+  - component: {fileID: 6014060896305743535}
   m_Layer: 0
   m_Name: AudioGameManager
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7341937484141452424
+--- !u!4 &3018976489637166824
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 151542623000850993}
+  m_GameObject: {fileID: 6861736881259833339}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.97937, y: 0, z: -0.11218}
@@ -32,18 +32,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5202378030575724044
+--- !u!114 &6014060896305743535
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 151542623000850993}
+  m_GameObject: {fileID: 6861736881259833339}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9838371269f900741b848c86b7be1ec1, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d64f37e1c9dfa441aa9413fe98ce4b2, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameJam.CollisionAudioManager2
+  m_EditorClassIdentifier: Assembly-CSharp::GameJam.CollisionAudioManager
   ambienceClip: {fileID: 8300000, guid: 46f1f4d02ab3a2f4196fed2c0de9fe42, type: 3}
   ambienceVolume: 0.4
   pedestrianImpactClips:
@@ -55,3 +55,6 @@ MonoBehaviour:
   vehicleCrashClips:
   - {fileID: 8300000, guid: fb491bf19b64aef4a88b11d4a7d3253b, type: 3}
   vehicleCrashVolume: 1
+  savedClips:
+  - {fileID: 8300000, guid: 9ae35b12cfac46a4aa33b73c10ad0a66, type: 3}
+  savedVolume: 1

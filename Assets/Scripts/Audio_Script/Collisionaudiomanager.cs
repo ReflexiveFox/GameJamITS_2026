@@ -4,15 +4,18 @@ using UnityEngine;
 namespace GameJam
 {
     /// <summary>
-    /// Gestisce l'audio di tutte le collisioni.
-    /// Ascolta Entity.OnVehicleHitPedestrian e Entity.OnVehicleHitVehicle.
-    ///
-    /// Setup: aggiungi questo script a un GameObject "AudioManager" in scena
-    /// e assegna i clip nell'Inspector.
+    /// Gestisce tutto l'audio del gioco:
+    ///   - Ambience in loop finché non scatta il GameOver
+    ///   - Collisioni con unica AudioSource (sempre interrompe il precedente)
     /// </summary>
     public class CollisionAudioManager : MonoBehaviour
     {
         public static CollisionAudioManager Instance { get; private set; }
+
+        [Header("══ AMBIENCE ══")]
+        [Tooltip("Clip audio da loopare per tutta la durata della partita.")]
+        [SerializeField] private AudioClip ambienceClip;
+        [Range(0f, 1f)][SerializeField] private float ambienceVolume = 0.4f;
 
         [Header("══ VEHICLE → PEDESTRIAN ══")]
 
@@ -30,54 +33,105 @@ namespace GameJam
         [SerializeField] private float bodyLandDelay = 0.8f;
 
         [Header("══ VEHICLE → VEHICLE ══")]
-
-        [Header("Crash metallico (immediato)")]
         [Tooltip("SFX scontro tra macchine. Più clip = scelta casuale.")]
         [SerializeField] private AudioClip[] vehicleCrashClips;
         [Range(0f, 1f)][SerializeField] private float vehicleCrashVolume = 1f;
 
-        // Tre AudioSource separate: crash pedone, voce team, crash macchine.
-        // Volumi indipendenti, nessuna interferenza reciproca.
-        private AudioSource _impactSource;
-        private AudioSource _voiceSource;
-        private AudioSource _vehicleSource;
+        [Header("══ ENTITÀ SALVATA ══")]
+        [Tooltip("SFX one shot quando un pedone o una macchina arriva sana al traguardo. Più clip = scelta casuale.")]
+        [SerializeField] private AudioClip[] savedClips;
+        [Range(0f, 1f)][SerializeField] private float savedVolume = 1f;
+
+        // AudioSource per l'ambience: separata così il loop non viene
+        // mai interrotto dai SFX delle collisioni.
+        private AudioSource _ambienceSource;
+
+        // AudioSource unica per tutti i SFX di collisione.
+        private AudioSource _sfxSource;
+
+        // AudioSource separata per il saved SFX: usa PlayOneShot così
+        // non interrompe mai i SFX di collisione in corso e viceversa.
+        private AudioSource _savedSource;
+
+        private Coroutine _activeSequence;
 
         private void Awake()
         {
             if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
 
-            _impactSource = MakeSource();
-            _voiceSource = MakeSource();
-            _vehicleSource = MakeSource();
+            // AudioSource ambience — loop attivo, volume basso, parte subito
+            _ambienceSource = gameObject.AddComponent<AudioSource>();
+            _ambienceSource.playOnAwake = false;
+            _ambienceSource.spatialBlend = 0f;
+            _ambienceSource.loop = true;  // loopa finché non chiamiamo Stop()
+            _ambienceSource.volume = ambienceVolume;
+
+            // AudioSource SFX collisioni — no loop, gestita manualmente
+            _sfxSource = gameObject.AddComponent<AudioSource>();
+            _sfxSource.playOnAwake = false;
+            _sfxSource.spatialBlend = 0f;
+            _sfxSource.loop = false;
+
+            // AudioSource saved — PlayOneShot: non interrompe i SFX di collisione
+            _savedSource = gameObject.AddComponent<AudioSource>();
+            _savedSource.playOnAwake = false;
+            _savedSource.spatialBlend = 0f;
+            _savedSource.loop = false;
 
             Entity.OnVehicleHitPedestrian += HandlePedestrianHit;
             Entity.OnVehicleHitVehicle += HandleVehicleCrash;
+            GameManager.OnGameOver += HandleGameOver;
+            GameManager.OnSavedLivesUpdated += HandleEntitySaved;
 
             Debug.Log("[CollisionAudio] ✅ Inizializzato.");
+        }
+
+        private void Start()
+        {
+            // Start invece di Awake: tutti i manager sono già inizializzati
+            StartAmbience();
         }
 
         private void OnDestroy()
         {
             Entity.OnVehicleHitPedestrian -= HandlePedestrianHit;
             Entity.OnVehicleHitVehicle -= HandleVehicleCrash;
+            GameManager.OnGameOver -= HandleGameOver;
+            GameManager.OnSavedLivesUpdated -= HandleEntitySaved;
         }
 
-        private AudioSource MakeSource()
+        // ── Ambience ──────────────────────────────────────────────────────────
+
+        private void StartAmbience()
         {
-            var s = gameObject.AddComponent<AudioSource>();
-            s.playOnAwake = false;
-            s.spatialBlend = 0f;
-            return s;
+            if (ambienceClip == null)
+            {
+                Debug.LogWarning("[CollisionAudio] ⚠️ Nessun ambienceClip assegnato nell'Inspector.");
+                return;
+            }
+
+            _ambienceSource.clip = ambienceClip;
+            _ambienceSource.Play();
+            Debug.Log($"[CollisionAudio] 🎵 Ambience avviata: '{ambienceClip.name}' in loop.");
         }
 
-        // ── Handlers ─────────────────────────────────────────────────────────
+        private void HandleGameOver(int savedLives)
+        {
+            // GameManager setta Time.timeScale = 0 al GameOver,
+            // ma AudioSource.Stop() funziona indipendentemente dal timeScale.
+            _ambienceSource.Stop();
+            Debug.Log("[CollisionAudio] 🔇 Ambience fermata (GameOver).");
+        }
+
+        // ── Handlers collisioni ───────────────────────────────────────────────
 
         private void HandlePedestrianHit(Entity vehicle, Entity pedestrian)
         {
             string name = pedestrian != null ? pedestrian.gameObject.name : "NULL";
             Debug.Log($"[CollisionAudio] 🚗💥🚶 Pedone investito: '{name}'");
-            StartCoroutine(PedestrianDeathSequence(name));
+            StopActiveSequence();
+            _activeSequence = StartCoroutine(PedestrianDeathSequence(name));
         }
 
         private void HandleVehicleCrash(Entity v1, Entity v2)
@@ -85,50 +139,61 @@ namespace GameJam
             string n1 = v1 != null ? v1.gameObject.name : "NULL";
             string n2 = v2 != null ? v2.gameObject.name : "NULL";
             Debug.Log($"[CollisionAudio] 🚗💥🚗 Scontro: '{n1}' vs '{n2}'");
-            PlayOneShot(_vehicleSource, vehicleCrashClips, vehicleCrashVolume, "CRASH VEHICLE", $"{n1} vs {n2}");
+            StopActiveSequence();
+            Play(vehicleCrashClips, vehicleCrashVolume, "CRASH VEHICLE", $"{n1} vs {n2}");
+        }
+
+        private void HandleEntitySaved(int savedLives)
+        {
+            // PlayOneShot su _savedSource: non interrompe mai i SFX di collisione
+            // in corso. Se due entità arrivano in contemporanea i suoni si sovrappongono
+            // brevemente — accettabile perché sono suoni positivi di breve durata.
+            var clip = Pick(savedClips, "SAVED", savedLives.ToString());
+            if (clip == null) return;
+            _savedSource.PlayOneShot(clip, savedVolume);
+            Debug.Log($"[CollisionAudio] 🎉 SAVED | '{clip.name}' | vite salvate: {savedLives}");
         }
 
         // ── Sequenza morte pedone ─────────────────────────────────────────────
 
         private IEnumerator PedestrianDeathSequence(string pedName)
         {
-            PlayOneShot(_impactSource, pedestrianImpactClips, pedestrianImpactVolume, "IMPATTO PEDONE", pedName);
+            Play(pedestrianImpactClips, pedestrianImpactVolume, "IMPATTO PEDONE", pedName);
 
             Debug.Log($"[CollisionAudio] ⏱️ Attendo {bodyLandDelay}s per '{pedName}'...");
-            // RealTime: funziona anche con Time.timeScale = 0 (GameOver di GameManager)
             yield return new WaitForSecondsRealtime(bodyLandDelay);
 
-            PlayExclusive(_voiceSource, teamVoiceClips, voiceVolume, "VOCE TEAM", pedName);
+            Play(teamVoiceClips, voiceVolume, "VOCE TEAM", pedName);
+            _activeSequence = null;
         }
 
-        // ── Helpers ───────────────────────────────────────────────────────────
+        // ── Core SFX ─────────────────────────────────────────────────────────
 
-        // Sovrappone i clip: ideale per impact SFX multipli ravvicinati
-        private void PlayOneShot(AudioSource src, AudioClip[] clips, float vol, string tag, string ctx)
-        {
-            var clip = Pick(clips, tag, ctx);
-            
-
-            if (clip == null)
-            {
-                Debug.LogWarning($"[CollisionAudio] ⚠️ [{tag}] Nessun clip valido per '{ctx}'. Audio saltato.");
-                return;
-            }    
-                
-            src.PlayOneShot(clip, vol);
-            Debug.Log($"[CollisionAudio] 🔊 [{tag}] '{clip.name}' {clip.length:F2}s vol:{vol} | '{ctx}'");
-        }
-
-        // Una sola voce alla volta: ferma la precedente se ancora in corso
-        private void PlayExclusive(AudioSource src, AudioClip[] clips, float vol, string tag, string ctx)
+        private void Play(AudioClip[] clips, float volume, string tag, string ctx)
         {
             var clip = Pick(clips, tag, ctx);
             if (clip == null) return;
-            if (src.isPlaying) src.Stop();
-            src.clip = clip;
-            src.volume = vol;
-            src.Play();
-            Debug.Log($"[CollisionAudio] 🎙️ [{tag}] '{clip.name}' {clip.length:F2}s vol:{vol} | '{ctx}'");
+
+            if (_sfxSource.isPlaying)
+            {
+                Debug.Log($"[CollisionAudio] 🔇 Interrompo SFX in corso per '{clip.name}'.");
+                _sfxSource.Stop();
+            }
+
+            _sfxSource.clip = clip;
+            _sfxSource.volume = volume;
+            _sfxSource.Play();
+
+            Debug.Log($"[CollisionAudio] 🔊 [{tag}] '{clip.name}' {clip.length:F2}s vol:{volume} | '{ctx}'");
+        }
+
+        private void StopActiveSequence()
+        {
+            if (_activeSequence != null)
+            {
+                StopCoroutine(_activeSequence);
+                _activeSequence = null;
+            }
         }
 
         private AudioClip Pick(AudioClip[] clips, string tag, string ctx)
@@ -147,12 +212,18 @@ namespace GameJam
         // ── Debug ─────────────────────────────────────────────────────────────
 
         [ContextMenu("TEST → Pedone investito (Play Mode)")]
-        private void DbgPedestrian() => StartCoroutine(PedestrianDeathSequence("PEDONE_TEST"));
+        private void DbgPedestrian() => HandlePedestrianHit(null, null);
 
         [ContextMenu("TEST → Scontro macchine")]
-        private void DbgVehicle() => PlayOneShot(_vehicleSource, vehicleCrashClips, vehicleCrashVolume, "CRASH VEHICLE", "TEST");
+        private void DbgVehicle() => HandleVehicleCrash(null, null);
 
         [ContextMenu("TEST → Solo voce team")]
-        private void DbgVoice() => PlayExclusive(_voiceSource, teamVoiceClips, voiceVolume, "VOCE TEAM", "TEST");
+        private void DbgVoice() => Play(teamVoiceClips, voiceVolume, "VOCE TEAM", "TEST");
+
+        [ContextMenu("TEST → Stop ambience")]
+        private void DbgStopAmbience() => HandleGameOver(0);
+
+        [ContextMenu("TEST → Entità salvata")]
+        private void DbgSaved() => HandleEntitySaved(0);
     }
 }
