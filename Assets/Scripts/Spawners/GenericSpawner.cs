@@ -6,8 +6,13 @@ namespace GameJam
     {
         [Header("Spawner Settings")]
         [SerializeField] private Entity prefab;
-        [SerializeField] private float minSpawnInterval = 3f;
-        [SerializeField] private float maxSpawnInterval = 5f;
+        [Header("Normal Spawn values")]
+        [SerializeField, Min(0f)] private float minSpawnInterval = 3f;
+        [SerializeField, Min(0f)] private float maxSpawnInterval = 5f;
+        [Header("Starting Spawn values")]
+        [SerializeField, Min(0f)] private float minStartSpawnInterval = 0f;
+        [SerializeField, Min(0f)] private float maxStartSpawnInterval = 3f;
+        [Space]
         [SerializeField] private int spawnCount = 1;
         [Header("Spawn Area Settings")]
         [Header("Horizontal Spawn Offset")]
@@ -22,7 +27,7 @@ namespace GameJam
 
         private void Start()
         {
-            UpdateSpawnInterval();
+            UpdateSpawnInterval(true);
         }
 
         private void Update()
@@ -33,13 +38,13 @@ namespace GameJam
             {
                 Spawn();
                 _timer = 0f;
-                UpdateSpawnInterval();
+                UpdateSpawnInterval(false);
             }
         }
 
-        private void UpdateSpawnInterval()
+        private void UpdateSpawnInterval(bool isStart)
         {
-            currentSpawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
+            currentSpawnInterval = Random.Range(isStart ? minStartSpawnInterval : minSpawnInterval, isStart ? maxStartSpawnInterval : maxSpawnInterval);
         }
 
         private void Spawn()
