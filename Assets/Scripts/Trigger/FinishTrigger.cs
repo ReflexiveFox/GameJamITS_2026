@@ -9,7 +9,7 @@ namespace GameJam
             if (other.TryGetComponent<Entity>(out Entity entity))
             {
                 GameManager.Instance.RegisterSavedEntity(entity);
-                Destroy(other.gameObject);
+                entity.DestroyEntity();
             }
         }
     }

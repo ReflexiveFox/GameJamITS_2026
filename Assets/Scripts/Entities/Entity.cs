@@ -82,9 +82,14 @@ namespace GameJam
                 {
                     OnPedestrianCollided?.Invoke(pedestrian);
                 }
-                gameObject.SetActive(false);
-                Destroy(gameObject, 2f);
+                DestroyEntity();
             }
+        }
+
+        public void DestroyEntity()
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject, 2f);
         }
 
         private void OnIncreaseTimePerformed(InputAction.CallbackContext context)
