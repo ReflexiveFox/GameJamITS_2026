@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &151542623000850993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7341937484141452424}
+  - component: {fileID: 5202378030575724044}
+  m_Layer: 0
+  m_Name: AudioGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7341937484141452424
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151542623000850993}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.97937, y: 0, z: -0.11218}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5202378030575724044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151542623000850993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9838371269f900741b848c86b7be1ec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameJam.CollisionAudioManager2
+  ambienceClip: {fileID: 8300000, guid: 46f1f4d02ab3a2f4196fed2c0de9fe42, type: 3}
+  ambienceVolume: 0.4
+  pedestrianImpactClips:
+  - {fileID: 8300000, guid: b71ef6bb0a765934ca6b72028b0e29a1, type: 3}
+  pedestrianImpactVolume: 1
+  teamVoiceClips: []
+  voiceVolume: 0.9
+  bodyLandDelay: 0.8
+  vehicleCrashClips:
+  - {fileID: 8300000, guid: fb491bf19b64aef4a88b11d4a7d3253b, type: 3}
+  vehicleCrashVolume: 1

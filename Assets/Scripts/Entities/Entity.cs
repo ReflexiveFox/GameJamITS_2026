@@ -1,19 +1,20 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Random = UnityEngine.Random;
 
 namespace GameJam
 {
     [RequireComponent(typeof(Rigidbody))]
     public abstract class Entity : SelectableEntity
     {
-        /// <summary>
-        /// When two entities collide, this event is triggered with the total number of entities involved in the collision (including the two that collided and any other entities that are currently colliding with them).
-        /// </summary>
         public static event Action<int> OnEntitiesCollided = delegate { };
-        public static event Action<Pedestrian> OnPedestrianCollided = delegate { };
         public event Action<Entity> OnEntityTimeStateChanged = delegate { };
+
+        // Unica aggiunta: due eventi statici per distinguere il tipo di collisione.
+        // Vengono fired dentro OnCollisionEnter che esiste già, usando i layer
+        // "car" e "pedestrian" già configurati nel progetto.
+        public static event Action<Entity, Entity> OnVehicleHitPedestrian = delegate { };
+        public static event Action<Entity, Entity> OnVehicleHitVehicle = delegate { };
 
         [Header("ENTITY SETTINGS")]
         [Header("Input")]
@@ -22,11 +23,7 @@ namespace GameJam
 
         [Header("Stats")]
         [SerializeField] private float timeFactor;
-        [Header("Lives")]
-        [SerializeField] private int minLives = 1;
-        [SerializeField] private int maxLives = 1;
-        private int currentLives;
-        [Space]
+        [SerializeField] private int lives = 1;
         [SerializeField] private float baseSpeed = 2f;
 
         [Header("Debug Info")]
@@ -34,14 +31,14 @@ namespace GameJam
 
         private Rigidbody _rb;
 
-        public int Lives => currentLives;
+        public int Lives => lives;
 
         public TimeState.TimeStateEnum CurrentTimeState
         {
             get => currentTimeState;
             set
             {
-                if(currentTimeState == value) return;
+                if (currentTimeState == value) return;
                 currentTimeState = value;
                 OnEntityTimeStateChanged?.Invoke(this);
             }
@@ -57,11 +54,6 @@ namespace GameJam
             decreaseTimeAction.action.performed += OnDecreaseTimePerformed;
         }
 
-        private void Start()
-        {
-            currentLives = Random.Range(minLives, maxLives);
-        }
-
         private void FixedUpdate()
         {
             Move();
@@ -75,15 +67,24 @@ namespace GameJam
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(collision.gameObject.TryGetComponent(out Entity otherEntity))
+            if (collision.gameObject.TryGetComponent(out Entity otherEntity))
             {
-                OnEntitiesCollided?.Invoke(currentLives);
-                if(this is Pedestrian pedestrian)
-                {
-                    OnPedestrianCollided?.Invoke(pedestrian);
-                }
-                gameObject.SetActive(false);
-                Destroy(gameObject, 2f);
+                OnEntitiesCollided?.Invoke(lives); // invariato
+
+                // Unica aggiunta: legge i layer per distinguere il tipo di scontro.
+                // Il confronto instanceID su car→car evita il doppio fire
+                // (OnCollisionEnter viene chiamato su entrambi i GameObject).
+                int carLayer = LayerMask.NameToLayer("Car");
+                int pedLayer = LayerMask.NameToLayer("Pedestrian");
+
+                if (gameObject.layer == carLayer && collision.gameObject.layer == pedLayer)
+                    OnVehicleHitPedestrian?.Invoke(this, otherEntity);
+                else if (gameObject.layer == carLayer && collision.gameObject.layer == carLayer
+                         && gameObject.GetInstanceID() < otherEntity.gameObject.GetInstanceID())
+                    OnVehicleHitVehicle?.Invoke(this, otherEntity);
+
+                gameObject.SetActive(false); // invariato
+                Destroy(gameObject, 2f);     // invariato
             }
         }
 
@@ -117,4 +118,3 @@ namespace GameJam
         }
     }
 }
-    

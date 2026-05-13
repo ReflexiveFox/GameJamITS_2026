@@ -181,6 +181,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1277509900162516079, guid: 09df2b1edde6fee4daeffb114dc63117, type: 3}
   m_PrefabInstance: {fileID: 14119625}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &87680129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 87680131}
+  - component: {fileID: 87680132}
+  m_Layer: 0
+  m_Name: AudioGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &87680131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87680129}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.03163, y: -0, z: 68.33095}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &87680132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87680129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9838371269f900741b848c86b7be1ec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameJam.CollisionAudioManager2
+  pedestrianImpactClips:
+  - {fileID: 8300000, guid: b71ef6bb0a765934ca6b72028b0e29a1, type: 3}
+  pedestrianImpactVolume: 1
+  teamVoiceClips: []
+  voiceVolume: 0.9
+  bodyLandDelay: 0.8
+  vehicleCrashClips:
+  - {fileID: 8300000, guid: fb491bf19b64aef4a88b11d4a7d3253b, type: 3}
+  vehicleCrashVolume: 1
 --- !u!1 &199971166
 GameObject:
   m_ObjectHideFlags: 0
@@ -2644,6 +2697,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6391277051726276771, guid: 7af12643a1d78d345b52c4a4659a8264, type: 3}
+      propertyPath: m_fontSize
+      value: 61.9
+      objectReference: {fileID: 0}
     - target: {fileID: 6771182520384318475, guid: 7af12643a1d78d345b52c4a4659a8264, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2740,6 +2797,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8822762350095616272, guid: 7af12643a1d78d345b52c4a4659a8264, type: 3}
+      propertyPath: m_fontSize
+      value: 61.9
+      objectReference: {fileID: 0}
     - target: {fileID: 9131912713903365700, guid: 7af12643a1d78d345b52c4a4659a8264, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2780,3 +2841,4 @@ SceneRoots:
   - {fileID: 1003589899}
   - {fileID: 2059009427}
   - {fileID: 7690004417163198786}
+  - {fileID: 87680131}
