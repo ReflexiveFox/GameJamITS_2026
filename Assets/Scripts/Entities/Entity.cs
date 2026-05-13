@@ -76,7 +76,7 @@ namespace GameJam
         {
             if(collision.gameObject.TryGetComponent(out Entity otherEntity))
             {
-                OnEntitiesCollided?.Invoke(lives);
+                OnEntitiesCollided?.Invoke(currentLives);
                 gameObject.SetActive(false);
                 Destroy(gameObject, 2f);
             }
