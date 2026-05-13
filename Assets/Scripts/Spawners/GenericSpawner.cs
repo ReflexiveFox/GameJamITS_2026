@@ -1,11 +1,22 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using static GameJam.GenericSpawner;
+using Random = UnityEngine.Random;
 
 namespace GameJam
 {
     public class GenericSpawner : MonoBehaviour
     {
+        [Serializable]
+        public struct SpawningEntity
+        {
+            public Entity prefabToSpawn;
+            public int amountToSpawn;
+        }
+
         [Header("Spawner Settings")]
-        [SerializeField] private Entity prefab;
+        [SerializeField] private List<SpawningEntity> prefabsToSpawn;
         [Header("Normal Spawn values")]
         [SerializeField, Min(0f)] private float minSpawnInterval = 3f;
         [SerializeField, Min(0f)] private float maxSpawnInterval = 5f;
@@ -49,10 +60,16 @@ namespace GameJam
 
         private void Spawn()
         {
-            for (int i = 0; i < spawnCount; i++)
+            for (int i = 0; i < spawnCount;)
             {
+                SpawningEntity spawningEntity = prefabsToSpawn[Random.Range(0, prefabsToSpawn.Count)];
                 Vector3 randomOffset = new(Random.Range(minXSpawnOffset, maxXSpawnOffset), 0f, Random.Range(minZSpawnOffset, maxZSpawnOffset));
-                Instantiate(prefab, transform.position + randomOffset, transform.rotation);
+                if (spawningEntity.amountToSpawn > 0)
+                {
+                    Instantiate(spawningEntity.prefabToSpawn, transform.position + randomOffset, transform.rotation);
+                    spawningEntity.amountToSpawn--;
+                    i++;
+                }
             }
         }
     }

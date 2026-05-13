@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 namespace GameJam
 {
@@ -20,7 +21,11 @@ namespace GameJam
 
         [Header("Stats")]
         [SerializeField] private float timeFactor;
-        [SerializeField] private int lives = 1;
+        [Header("Lives")]
+        [SerializeField] private int minLives = 1;
+        [SerializeField] private int maxLives = 1;
+        private int currentLives;
+        [Space]
         [SerializeField] private float baseSpeed = 2f;
 
         [Header("Debug Info")]
@@ -28,7 +33,7 @@ namespace GameJam
 
         private Rigidbody _rb;
 
-        public int Lives => lives;
+        public int Lives => currentLives;
 
         public TimeState.TimeStateEnum CurrentTimeState
         {
@@ -49,6 +54,11 @@ namespace GameJam
 
             increaseTimeAction.action.performed += OnIncreaseTimePerformed;
             decreaseTimeAction.action.performed += OnDecreaseTimePerformed;
+        }
+
+        private void Start()
+        {
+            currentLives = Random.Range(minLives, maxLives);
         }
 
         private void FixedUpdate()
