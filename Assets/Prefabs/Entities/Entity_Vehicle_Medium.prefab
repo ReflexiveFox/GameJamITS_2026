@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 1
-  outlineColor: {r: 0.044828374, g: 0.005574857, b: 0.98490566, a: 1}
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 10
   precomputeOutline: 0
   bakeKeys: []
@@ -121,7 +121,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 156582348073255995, guid: 0d3fecc0a72fea644817b2287092d0e9, type: 3}
       propertyPath: m_Name
-      value: Entity_Car_Medium
+      value: Entity_Vehicle_Medium
       objectReference: {fileID: 0}
     - target: {fileID: 156582348073255995, guid: 0d3fecc0a72fea644817b2287092d0e9, type: 3}
       propertyPath: m_Layer
@@ -240,7 +240,8 @@ MonoBehaviour:
   increaseTimeAction: {fileID: -8069266222520763899, guid: d30d020909ccf2d4499630a6803dee37, type: 3}
   decreaseTimeAction: {fileID: -5643866219403781520, guid: d30d020909ccf2d4499630a6803dee37, type: 3}
   timeFactor: 1
-  lives: 1
+  minLives: 1
+  maxLives: 1
   baseSpeed: 2
   currentTimeState: 1
 --- !u!4 &6860152731639589701 stripped
