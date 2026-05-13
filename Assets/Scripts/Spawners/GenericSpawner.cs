@@ -16,7 +16,8 @@ namespace GameJam
         }
 
         [Header("Spawner Settings")]
-        [SerializeField] private List<SpawningEntity> prefabsToSpawn;
+        [SerializeField] private List<SpawningEntity> entitiesToSpawn;
+        private List<SpawningEntity> currentEntitiesToSpawn;
         [Header("Normal Spawn values")]
         [SerializeField, Min(0f)] private float minSpawnInterval = 3f;
         [SerializeField, Min(0f)] private float maxSpawnInterval = 5f;
@@ -36,9 +37,24 @@ namespace GameJam
         private float _timer;
         private float currentSpawnInterval;
 
+        private bool IsListEmpty
+        {
+            get
+            {
+                foreach(var entity in currentEntitiesToSpawn)
+                {
+                    if (entity.amountToSpawn != 0)
+                        return false;
+                }
+                return true;
+            }
+        }
+
+
         private void Start()
         {
             UpdateSpawnInterval(true);
+            currentEntitiesToSpawn = entitiesToSpawn;
         }
 
         private void Update()
@@ -62,12 +78,22 @@ namespace GameJam
         {
             for (int i = 0; i < spawnCount;)
             {
-                SpawningEntity spawningEntity = prefabsToSpawn[Random.Range(0, prefabsToSpawn.Count)];
+                if (IsListEmpty)
+                {
+                    // Refill list
+                    currentEntitiesToSpawn = entitiesToSpawn;
+                }
+                SpawningEntity spawningEntity = currentEntitiesToSpawn[Random.Range(0, entitiesToSpawn.Count)];
                 Vector3 randomOffset = new(Random.Range(minXSpawnOffset, maxXSpawnOffset), 0f, Random.Range(minZSpawnOffset, maxZSpawnOffset));
+                
                 if (spawningEntity.amountToSpawn > 0)
                 {
                     Instantiate(spawningEntity.prefabToSpawn, transform.position + randomOffset, transform.rotation);
-                    spawningEntity.amountToSpawn--;
+
+                    if (currentEntitiesToSpawn.Count > 1)
+                    {
+                        spawningEntity.amountToSpawn--;
+                    }
                     i++;
                 }
             }
