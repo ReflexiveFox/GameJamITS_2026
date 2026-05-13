@@ -72,6 +72,7 @@ namespace GameJam
             {
                 if (selectable == null)
                 {
+                    Debug.Log("Removed null reference from selection list.");
                     currentSelectionList.Remove(selectable);
                     break;
                 }

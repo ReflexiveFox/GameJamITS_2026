@@ -6,6 +6,7 @@ namespace GameJam
     public class UI_Manager : MonoBehaviour
     {
         [Header("References")]
+        [SerializeField] private UI_Panel tutorialPanel;
         [SerializeField] private UI_Panel gamePanel;
         [SerializeField] private UI_Panel pausePanel;
         [SerializeField] private UI_Panel gameOverPanel;
@@ -14,15 +15,26 @@ namespace GameJam
 
         private void Awake()
         {
+            GameManager.OnGameStarted += HandleGameStarted;
             GameManager.OnGameOver += HandleGameOver;
             GameManager.OnGamePaused += HandlePauseMenu;
         }
 
         private void OnDestroy()
         {
+            GameManager.OnGameStarted -= HandleGameStarted;
             GameManager.OnGameOver -= HandleGameOver;
             GameManager.OnGamePaused -= HandlePauseMenu;
         }
+
+        private void HandleGameStarted()
+        {
+            gamePanel.Show();
+            tutorialPanel.Hide();
+            pausePanel.Hide();
+            gameOverPanel.Hide();
+        }
+
         private void HandlePauseMenu(bool isPaused)
         {
             if (isPaused)

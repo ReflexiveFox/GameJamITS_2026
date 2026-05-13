@@ -23,7 +23,7 @@ namespace GameJam
         }
         public void UpdateScoreText(int savedLives)
         {
-            scoreText.text = $"Saved Lives: {savedLives}";
+            scoreText.text = $"Saved Lives\n{savedLives}";
         }
     }
 }

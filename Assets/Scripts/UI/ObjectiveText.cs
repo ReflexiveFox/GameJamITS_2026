@@ -26,7 +26,7 @@ namespace GameJam
 
         public void UpdateObjectiveText(int newValue)
         {
-            objectiveText.text = $"Lives lost: {newValue} / {GameManager.Instance.TargetLostLives}";
+            objectiveText.text = $"Lives lost\n{newValue} / {GameManager.Instance.TargetLostLives}";
         }
     }
 }

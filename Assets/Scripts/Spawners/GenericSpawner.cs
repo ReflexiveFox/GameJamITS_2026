@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static GameJam.GenericSpawner;
 using Random = UnityEngine.Random;
 
 namespace GameJam
@@ -36,6 +35,7 @@ namespace GameJam
 
         private float _timer;
         private float currentSpawnInterval;
+        private bool canSpawn;
 
         private bool IsListEmpty
         {
@@ -58,11 +58,12 @@ namespace GameJam
         private void Start()
         {
             currentEntitiesToSpawn = entitiesToSpawn;
+            canSpawn = false;
         }
 
         private void Update()
         {
-            if(GameManager.Instance.IsPaused) return;
+            if(GameManager.Instance.IsPaused || !canSpawn) return;
 
             _timer += Time.deltaTime;
 
@@ -81,6 +82,7 @@ namespace GameJam
 
         private void StartSpawning()
         {
+            canSpawn = true;
             SetSpawnInterval(true);
         }
 
@@ -91,6 +93,8 @@ namespace GameJam
 
         private void Spawn()
         {
+            if(!canSpawn) return;
+
             for (int i = 0; i < spawnCount;)
             {
                 if (IsListEmpty)
