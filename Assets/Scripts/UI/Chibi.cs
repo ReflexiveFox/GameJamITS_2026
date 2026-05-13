@@ -1,16 +1,42 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Chibi : MonoBehaviour
+namespace GameJam
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [RequireComponent(typeof(Image))]
+    public abstract class Chibi : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private float happyDuration = 2f;
+        [SerializeField] private Sprite normalChibi;
+        [SerializeField] private Sprite happyChibi;
+        private Image image;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Awake()
+        {
+            image = GetComponent<Image>();
+            HandleEventRegistrations(true);
+        }
+
+        private void OnDestroy()
+        {
+            HandleEventRegistrations(false);
+        }
+
+        protected void SetHappyForDuration()
+        {
+            SetHappyChibi();
+            Invoke(nameof(SetNormalChibi), happyDuration);
+        }
+
+        private void SetNormalChibi()
+        {
+            image.sprite = normalChibi;
+        }
+        private void SetHappyChibi()
+        {
+            image.sprite = happyChibi;
+        }
+
+        protected abstract void HandleEventRegistrations(bool isRegistering);
     }
 }

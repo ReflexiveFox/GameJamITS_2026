@@ -50,26 +50,41 @@ namespace GameJam
             }
         }
 
+        private void Awake()
+        {
+            GameManager.OnGameStarted += StartSpawning;
+        }
 
         private void Start()
         {
-            UpdateSpawnInterval(true);
             currentEntitiesToSpawn = entitiesToSpawn;
         }
 
         private void Update()
         {
+            if(GameManager.Instance.IsPaused) return;
+
             _timer += Time.deltaTime;
 
             if (_timer >= currentSpawnInterval)
             {
                 Spawn();
                 _timer = 0f;
-                UpdateSpawnInterval(false);
+                SetSpawnInterval(false);
             }
         }
 
-        private void UpdateSpawnInterval(bool isStart)
+        private void OnDestroy()
+        {
+            GameManager.OnGameStarted -= StartSpawning;
+        }
+
+        private void StartSpawning()
+        {
+            SetSpawnInterval(true);
+        }
+
+        private void SetSpawnInterval(bool isStart)
         {
             currentSpawnInterval = Random.Range(isStart ? minStartSpawnInterval : minSpawnInterval, isStart ? maxStartSpawnInterval : maxSpawnInterval);
         }

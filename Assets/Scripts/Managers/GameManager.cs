@@ -11,6 +11,7 @@ namespace GameJam
         public static event Action<int> OnTargetLostLivesUpdated = delegate { };
         public static event Action<int> OnSavedLivesUpdated = delegate { };
         public static event Action<int> OnGameOver = delegate { };
+        public static event Action OnGameStarted = delegate { };
         public static event Action<bool> OnGamePaused = delegate { };
 
         [Header("Input")]
@@ -21,7 +22,7 @@ namespace GameJam
         [Header("Debug, don't touch")]
         [SerializeField] private int currentSavedLives;
         [SerializeField] private int currentLostLives = 0;
-        [SerializeField] private bool isPaused = false;
+        [SerializeField] private bool _isPaused = false;
         [SerializeField] private bool canListenPause;
         public int CurrentLostLives
         {
@@ -45,6 +46,8 @@ namespace GameJam
             }
         }
 
+        public bool IsPaused { get => _isPaused; private set => _isPaused = value; }
+
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -64,7 +67,7 @@ namespace GameJam
         {
             CurrentSavedLives = 0;
             CurrentLostLives = 0;
-            canListenPause = true;
+            canListenPause = false;
         }
 
         private void OnDestroy()
@@ -75,10 +78,16 @@ namespace GameJam
             SceneManager.sceneUnloaded -= ResetTimeScale;
         }
 
+        // This method can be called from a UI button of tutorial to start the gameplay.
+        public void StartGame()
+        {
+            OnGameStarted?.Invoke();
+        }
+
         private void HandlePauseState(InputAction.CallbackContext obj)
         {
             if (!canListenPause) return;
-            if (isPaused)
+            if (IsPaused)
             {
                 ResumeGame();
             }
@@ -101,14 +110,14 @@ namespace GameJam
 
         public void PauseGame()
         {
-            isPaused = true;
+            IsPaused = true;
             Time.timeScale = 0f;
             OnGamePaused?.Invoke(true);
         }
 
         public void ResumeGame()
         {
-            isPaused = false;
+            IsPaused = false;
             Time.timeScale = 1f;
             OnGamePaused?.Invoke(false);
         }
