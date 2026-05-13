@@ -7,6 +7,7 @@ namespace GameJam
     {
         [Header("References")]
         [SerializeField] private UI_Panel gamePanel;
+        [SerializeField] private UI_Panel pausePanel;
         [SerializeField] private UI_Panel gameOverPanel;
 
         [SerializeField] private TextMeshProUGUI resultText;
@@ -14,11 +15,26 @@ namespace GameJam
         private void Awake()
         {
             GameManager.OnGameOver += HandleGameOver;
+            GameManager.OnGamePaused += HandlePauseMenu;
         }
 
         private void OnDestroy()
         {
             GameManager.OnGameOver -= HandleGameOver;
+            GameManager.OnGamePaused -= HandlePauseMenu;
+        }
+        private void HandlePauseMenu(bool isPaused)
+        {
+            if (isPaused)
+            {
+                gamePanel.Hide();
+                pausePanel.Show();
+            }
+            else
+            {
+                pausePanel.Hide();
+                gamePanel.Show();
+            }
         }
 
         private void HandleGameOver(int savedLives)
