@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
       propertyPath: maxXSpawnOffset
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
       propertyPath: maxZSpawnOffset
@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
       propertyPath: minXSpawnOffset
-      value: -0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
       propertyPath: minZSpawnOffset
@@ -94,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
       propertyPath: entitiesToSpawn.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
       propertyPath: prefabsToSpawn.Array.data[0].amountToSpawn
@@ -122,28 +122,36 @@ PrefabInstance:
       objectReference: {fileID: 3504139587319095096, guid: 623a6e0737c746e479502461b1cda9dc, type: 3}
     - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
       propertyPath: entitiesToSpawn.Array.data[0].amountToSpawn
-      value: 30
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
       propertyPath: entitiesToSpawn.Array.data[0].prefabToSpawn
       value: 
-      objectReference: {fileID: 7657380318670572061, guid: 52662dbb493382640ba4c7557e307f3a, type: 3}
+      objectReference: {fileID: 2483798918761390524, guid: 79abb2371dd8a59489b1d31905766f08, type: 3}
     - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
       propertyPath: entitiesToSpawn.Array.data[1].amountToSpawn
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
       propertyPath: entitiesToSpawn.Array.data[1].prefabToSpawn
       value: 
-      objectReference: {fileID: 3504139587319095096, guid: 623a6e0737c746e479502461b1cda9dc, type: 3}
+      objectReference: {fileID: 7657380318670572061, guid: 52662dbb493382640ba4c7557e307f3a, type: 3}
     - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
       propertyPath: entitiesToSpawn.Array.data[2].amountToSpawn
-      value: 65
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
       propertyPath: entitiesToSpawn.Array.data[2].prefabToSpawn
       value: 
-      objectReference: {fileID: 2483798918761390524, guid: 79abb2371dd8a59489b1d31905766f08, type: 3}
+      objectReference: {fileID: 3504139587319095096, guid: 623a6e0737c746e479502461b1cda9dc, type: 3}
+    - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
+      propertyPath: entitiesToSpawn.Array.data[3].amountToSpawn
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230452076641410779, guid: 05106d17fc68356449da1b5a3950e95e, type: 3}
+      propertyPath: entitiesToSpawn.Array.data[3].prefabToSpawn
+      value: 
+      objectReference: {fileID: 3515130398818035160, guid: 847c7f90c8bab434ba9d0f97fcec2bdc, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
