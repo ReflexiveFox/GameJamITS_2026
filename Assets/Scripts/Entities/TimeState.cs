@@ -1,9 +1,12 @@
 using System;
+using UnityEngine;
 
 namespace GameJam
 {
-    public static class TimeState
+    public class TimeState : MonoBehaviour
     {
+        public static TimeState Instance;
+
         [Serializable]
         public enum TimeStateEnum
         {
@@ -11,11 +14,17 @@ namespace GameJam
             Normal = 1,
             Fast = 2
         }
-        public const float Slow = 0.5f;
-        public const float Normal = 1f;
-        public const float Fast = 2f;
+        [SerializeField] private float Slow = 0.5f;
+        [SerializeField] private float Normal = 1f;
+        [SerializeField] private float Fast = 2f;
 
-        public static float GetTimeFactor(TimeStateEnum timeState)
+        private void Awake()
+        {
+            if (Instance == null)
+                Instance = this;
+        }
+
+        public float GetTimeFactor(TimeStateEnum timeState)
         {
             return timeState switch
             {

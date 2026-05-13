@@ -85,7 +85,7 @@ namespace GameJam
 
         private void Move()
         {
-            Vector3 velocity = transform.forward * baseSpeed * TimeState.GetTimeFactor(CurrentTimeState);
+            Vector3 velocity = transform.forward * baseSpeed * TimeState.Instance.GetTimeFactor(CurrentTimeState);
             velocity.y = _rb.linearVelocity.y;
             _rb.linearVelocity = velocity;
         }

@@ -25,6 +25,11 @@ namespace GameJam
             }
         }
 
+        private void OnDestroy()
+        {
+            Deselect();
+        }
+
         public virtual void Select()
         {
             isSelected = true;

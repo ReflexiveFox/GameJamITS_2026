@@ -103,7 +103,6 @@ namespace GameJam
             {
                 return;
             }
-
             currentSelectionList.Add(selectable);
             selectable.Select();
         }
