@@ -12,6 +12,7 @@ namespace GameJam
         /// When two entities collide, this event is triggered with the total number of entities involved in the collision (including the two that collided and any other entities that are currently colliding with them).
         /// </summary>
         public static event Action<int> OnEntitiesCollided = delegate { };
+        public static event Action<Pedestrian> OnPedestrianCollided = delegate { };
         public event Action<Entity> OnEntityTimeStateChanged = delegate { };
 
         [Header("ENTITY SETTINGS")]
@@ -77,6 +78,10 @@ namespace GameJam
             if(collision.gameObject.TryGetComponent(out Entity otherEntity))
             {
                 OnEntitiesCollided?.Invoke(currentLives);
+                if(this is Pedestrian pedestrian)
+                {
+                    OnPedestrianCollided?.Invoke(pedestrian);
+                }
                 gameObject.SetActive(false);
                 Destroy(gameObject, 2f);
             }
