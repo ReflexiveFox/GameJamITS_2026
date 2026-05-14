@@ -234,7 +234,7 @@ MonoBehaviour:
   decreaseTimeAction: {fileID: -8069266222520763899, guid: d30d020909ccf2d4499630a6803dee37, type: 3}
   timeFactor: 1
   currentLives: 30
-  baseSpeed: 2
+  baseSpeed: 4
   currentTimeState: 1
 --- !u!4 &6362550236239982647 stripped
 Transform:
