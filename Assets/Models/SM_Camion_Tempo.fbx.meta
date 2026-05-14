@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bcaf3f42407bdee489953c0a8924d1cb
+guid: e95781374a338dc408234ebfecf4e7f9
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -49,6 +49,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Vetro
     second: {fileID: 2100000, guid: 0d14b421170edae4e8a453a5341dc1b6, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Time font2
+    second: {fileID: 2800000, guid: f63264db8d37b5a44996f980f56ad092, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
