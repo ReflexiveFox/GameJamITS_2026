@@ -1428,7 +1428,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "<b>2D & 3D Artists</b>\nSerena Fontanesi\nSabrina Luciano\nTeresa Zhang\nSimone
+    Oldani\nDiego Dall'Agata\n\n<b>Game Developers</b>\nLorenzo Petraroli\nFrancesco
+    Luigi Cerulli\n\n<b>Audio Developer</b>\nGiovanni Sarti\n\n\n\n\n<b>Music by</b>\nChiming
+    Out by FoolBoyMedia https://freesound.org/s/246390/ \nLicense: Attribution NonCommercial
+    4.0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1822,32 +1826,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>2D & 3D Artists</b>
-
-    Serena Fontanesi
-
-    Sabrina Luciano
-
-    Teresa
-    Zhang
-
-    Simone Oldani
-
-    Diego Dall''Agata
-
-
-    <b>Game Developers</b>
-
-    Lorenzo
-    Petraroli
-
-    Francesco Luigi Cerulli
-
-
-    <b>Audio Developer</b>
-
-    Giovanni
-    Sarti'
+  m_text: "<b>2D & 3D Artists</b>\nSerena Fontanesi\nSabrina Luciano\nTeresa Zhang\nSimone
+    Oldani\nDiego Dall'Agata\n\n<b>Game Developers</b>\nLorenzo Petraroli\nFrancesco
+    Luigi Cerulli\n\n<b>Audio Developer</b>\nGiovanni Sarti\n\n\n\n\n<b>Music by</b>\nChiming
+    Out by FoolBoyMedia https://freesound.org/s/246390/ \nLicense: Attribution NonCommercial
+    4.0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1874,10 +1857,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.3
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
