@@ -138,7 +138,12 @@ MonoBehaviour:
   timeFactor: 1
   currentLives: 1
   baseSpeed: 1
+  force: 15
+  upwardInfluence: 0.5
+  forceMode: 1
   currentTimeState: 1
+  animator: {fileID: 5007006072989767447}
+  waitTime: 1
 --- !u!1001 &8575166990193078978
 PrefabInstance:
   m_ObjectHideFlags: 0

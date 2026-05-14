@@ -355,4 +355,9 @@ MonoBehaviour:
   timeFactor: 1
   currentLives: 1
   baseSpeed: 1
+  force: 15
+  upwardInfluence: 0.5
+  forceMode: 1
   currentTimeState: 1
+  animator: {fileID: 3919968357127327139}
+  waitTime: 1

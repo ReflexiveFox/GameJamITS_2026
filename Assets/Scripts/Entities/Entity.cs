@@ -26,10 +26,17 @@ namespace GameJam
         [SerializeField] private int currentLives = 1;
         [SerializeField] private float baseSpeed = 2f;
 
+        [Header("Force Settings")]
+        [SerializeField] private float force = 15f;
+        [SerializeField] private float upwardInfluence = 0.5f;
+        [SerializeField] private ForceMode forceMode = ForceMode.Impulse;
+
+        private Collider cachedCollider;
+
         [Header("Debug Info")]
         [SerializeField] private TimeState.TimeStateEnum currentTimeState = TimeState.TimeStateEnum.Normal;
 
-        private Rigidbody _rb;
+        protected Rigidbody rb;
 
         public int Lives => currentLives;
 
@@ -47,8 +54,10 @@ namespace GameJam
         protected override void Awake()
         {
             base.Awake();
-            _rb = GetComponent<Rigidbody>();
-            _rb.freezeRotation = true;
+            cachedCollider = GetComponent<Collider>();
+            rb = GetComponent<Rigidbody>();
+
+            rb.freezeRotation = true;
 
             increaseTimeAction.action.performed += OnIncreaseTimePerformed;
             decreaseTimeAction.action.performed += OnDecreaseTimePerformed;
@@ -79,17 +88,43 @@ namespace GameJam
                 int pedLayer = LayerMask.NameToLayer("Pedestrian");
 
                 if (gameObject.layer == carLayer && collision.gameObject.layer == pedLayer)
+                {
                     OnVehicleHitPedestrian?.Invoke(this, otherEntity);
+                    Rigidbody victimRigidbody = collision.rigidbody;
+
+                    if (victimRigidbody == null)
+                        return;
+
+                    Vector3 forwardDirection = transform.forward;
+                    Vector3 upwardDirection = Vector3.up * upwardInfluence;
+
+                    Vector3 finalDirection = (forwardDirection + upwardDirection).normalized;
+
+                    victimRigidbody.AddForce(finalDirection * force, forceMode);
+
+                    
+
+                    Pedestrian ped = collision.gameObject.GetComponent<Pedestrian>();
+                    ped.cachedCollider.enabled = false;
+                    ped.PlayDeathAnimation();
+                    collision.rigidbody.AddForce(collision.impulse);
+
+                    ped.DestroyEntity();
+                }
                 else if (gameObject.layer == carLayer && collision.gameObject.layer == carLayer
                          && gameObject.GetInstanceID() < otherEntity.gameObject.GetInstanceID())
+                {
                     OnVehicleHitVehicle?.Invoke(this, otherEntity);
-
+                    
+                }
+                
                 DestroyEntity();
             }
         }
 
-        public void DestroyEntity()
+        public virtual void DestroyEntity()
         {
+            Debug.Log("Base destroy");
             gameObject.SetActive(false);
             Destroy(gameObject, 2f);
         }
@@ -109,8 +144,8 @@ namespace GameJam
         private void Move()
         {
             Vector3 velocity = transform.forward * baseSpeed * TimeState.Instance.GetTimeFactor(CurrentTimeState);
-            velocity.y = _rb.linearVelocity.y;
-            _rb.linearVelocity = velocity;
+            velocity.y = rb.linearVelocity.y;
+            rb.linearVelocity = velocity;
         }
 
         public void ReduceTimeFactor()
