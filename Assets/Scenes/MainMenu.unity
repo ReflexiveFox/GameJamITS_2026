@@ -233,6 +233,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 576692461}
     m_Modifications:
+    - target: {fileID: 62482664352107717, guid: 4c6a362284e00c5428d7fa5c5b44753a, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 689720435445123750, guid: 4c6a362284e00c5428d7fa5c5b44753a, type: 3}
       propertyPath: m_fontSize
       value: 35.8
@@ -324,6 +328,10 @@ PrefabInstance:
     - target: {fileID: 6520865207147266326, guid: 4c6a362284e00c5428d7fa5c5b44753a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701803223193933881, guid: 4c6a362284e00c5428d7fa5c5b44753a, type: 3}
+      propertyPath: m_fontSize
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 7361242149857025043, guid: 4c6a362284e00c5428d7fa5c5b44753a, type: 3}
       propertyPath: m_fontSize
@@ -1648,10 +1656,10 @@ RectTransform:
   - {fileID: 1080829835}
   m_Father: {fileID: 576692461}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -73.32495, y: -152.11511}
-  m_SizeDelta: {x: -1537.6902, y: -602.2548}
+  m_SizeDelta: {x: 382.3098, y: 477.74518}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1576812431
 MonoBehaviour:
