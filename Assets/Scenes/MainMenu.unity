@@ -1430,9 +1430,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: "<b>2D & 3D Artists</b>\nSerena Fontanesi\nSabrina Luciano\nTeresa Zhang\nSimone
     Oldani\nDiego Dall'Agata\n\n<b>Game Developers</b>\nLorenzo Petraroli\nFrancesco
-    Luigi Cerulli\n\n<b>Audio Developer</b>\nGiovanni Sarti\n\n\n\n\n<b>Music by</b>\nChiming
-    Out by FoolBoyMedia https://freesound.org/s/246390/ \nLicense: Attribution NonCommercial
-    4.0"
+    Luigi Cerulli\n\n<b>Audio Developer</b>\nGiovanni Sarti\n\n\n\n\n<b>Special Thanks</b>\nITS
+    Academy Olivetti for hosting the Jam\n\n<b>Music by</b>\nChiming Out by FoolBoyMedia
+    https://freesound.org/s/246390/ \nLicense: Attribution NonCommercial 4.0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1828,9 +1828,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: "<b>2D & 3D Artists</b>\nSerena Fontanesi\nSabrina Luciano\nTeresa Zhang\nSimone
     Oldani\nDiego Dall'Agata\n\n<b>Game Developers</b>\nLorenzo Petraroli\nFrancesco
-    Luigi Cerulli\n\n<b>Audio Developer</b>\nGiovanni Sarti\n\n\n\n\n<b>Music by</b>\nChiming
-    Out by FoolBoyMedia https://freesound.org/s/246390/ \nLicense: Attribution NonCommercial
-    4.0"
+    Luigi Cerulli\n\n<b>Audio Developer</b>\nGiovanni Sarti\n\n\n\n\n<b>Special Thanks</b>\nITS
+    Academy Olivetti for hosting the Jam\n\n<b>Music by</b>\nChiming Out by FoolBoyMedia
+    https://freesound.org/s/246390/ \nLicense: Attribution NonCommercial 4.0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
