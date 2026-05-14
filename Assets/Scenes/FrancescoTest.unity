@@ -1699,10 +1699,6 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 59.55
       objectReference: {fileID: 0}
-    - target: {fileID: 2970068016243552053, guid: 7af12643a1d78d345b52c4a4659a8264, type: 3}
-      propertyPath: m_text
-      value: Decelerate/ Accelerate
-      objectReference: {fileID: 0}
     - target: {fileID: 3035120516714204620, guid: 7af12643a1d78d345b52c4a4659a8264, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2094,10 +2090,6 @@ PrefabInstance:
     - target: {fileID: 8175180485012561767, guid: 7af12643a1d78d345b52c4a4659a8264, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8537385199864065224, guid: 7af12643a1d78d345b52c4a4659a8264, type: 3}
-      propertyPath: m_text
-      value: Decelerate / Acelerate
       objectReference: {fileID: 0}
     - target: {fileID: 8672195840309451639, guid: 7af12643a1d78d345b52c4a4659a8264, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
