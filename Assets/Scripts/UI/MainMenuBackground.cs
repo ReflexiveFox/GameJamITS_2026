@@ -82,10 +82,7 @@ namespace GameJam
             SetAlpha(currentImage, 0f);
             SetAlpha(nextImage, 1f);
 
-            Image cachedImage = currentImage;
-            currentImage = nextImage;
-            nextImage = cachedImage;
-
+            (nextImage, currentImage) = (currentImage, nextImage);
             SetAlpha(nextImage, 0f);
         }
 
