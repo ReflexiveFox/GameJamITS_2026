@@ -335,7 +335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7361242149857025043, guid: 4c6a362284e00c5428d7fa5c5b44753a, type: 3}
       propertyPath: m_fontSize
-      value: 70.5
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 7741304628097569072, guid: 4c6a362284e00c5428d7fa5c5b44753a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1088,8 +1088,8 @@ MonoBehaviour:
   backgroundSprites:
   - {fileID: 21300000, guid: 7fd3e3435c34ebd47acb7174b49e3317, type: 3}
   - {fileID: 21300000, guid: f414670214f083b488a4fdcf498e3d16, type: 3}
-  transitionDuration: 0.5
-  stayDuration: 3
+  transitionDuration: 0.25
+  stayDuration: 0.75
 --- !u!224 &606932833 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9126050599773383622, guid: e7bb60cd6412b18449a739952392622a, type: 3}
@@ -1382,6 +1382,7 @@ GameObject:
   - component: {fileID: 991363909}
   - component: {fileID: 991363911}
   - component: {fileID: 991363910}
+  - component: {fileID: 991363912}
   m_Layer: 5
   m_Name: CreditsText (1)
   m_TagString: Untagged
@@ -1422,17 +1423,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>2D & 3D Artists</b>\nSerena Fontanesi\nSabrina Luciano\nTeresa Zhang\nSimone
-    Oldani\nDiego Dall'Agata\n\n<b>Game Developers</b>\nLorenzo Petraroli\nFrancesco
-    Luigi Cerulli\n\n<b>Audio Developer</b>\nGiovanni Sarti\n\n\n\n\n<b>Special Thanks</b>\nITS
-    Academy Olivetti for hosting the Jam\n\n<b>Music by</b>\nChiming Out by FoolBoyMedia
-    https://freesound.org/s/246390/ \nLicense: Attribution NonCommercial 4.0"
+  m_text: '<b>2D & 3D Artists</b>
+
+    Serena Fontanesi
+
+    Sabrina Luciano
+
+    Teresa
+    Zhang
+
+    Simone Oldani
+
+    Diego Dall''Agata
+
+
+    <b>Game Developers</b>
+
+    <link="https://linktr.ee/reflexivefox"><color=#3A86FF><u>Lorenzo
+    Petraroli</color></u></link>
+
+    Francesco Luigi Cerulli
+
+
+    <b>Audio Developer</b>
+
+    Giovanni
+    Sarti
+
+
+
+
+
+    <b>Special Thanks</b>
+
+    ITS Academy Olivetti for hosting the
+    Jam
+
+
+    <b>Music by</b>
+
+    <link="https://freesound.org/s/246390/"><color=#3A86FF><u>Chiming
+    Out by FoolBoyMedia</color></u></link>
+
+    License: Attribution NonCommercial
+    4.0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1512,6 +1552,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 991363908}
   m_CullTransparentMesh: 1
+--- !u!114 &991363912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991363908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4c24e5273597247a85f90981fb5e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameJam.TMPLinkOpener
 --- !u!224 &1080829835 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4534218939344522821, guid: 1861bdf553a7792409b78a9e772d04b1, type: 3}
@@ -1565,12 +1617,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1593,7 +1645,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -1780,6 +1832,7 @@ GameObject:
   - component: {fileID: 1799722021}
   - component: {fileID: 1799722023}
   - component: {fileID: 1799722022}
+  - component: {fileID: 1799722024}
   m_Layer: 5
   m_Name: CreditsText
   m_TagString: Untagged
@@ -1820,17 +1873,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>2D & 3D Artists</b>\nSerena Fontanesi\nSabrina Luciano\nTeresa Zhang\nSimone
-    Oldani\nDiego Dall'Agata\n\n<b>Game Developers</b>\nLorenzo Petraroli\nFrancesco
-    Luigi Cerulli\n\n<b>Audio Developer</b>\nGiovanni Sarti\n\n\n\n\n<b>Special Thanks</b>\nITS
-    Academy Olivetti for hosting the Jam\n\n<b>Music by</b>\nChiming Out by FoolBoyMedia
-    https://freesound.org/s/246390/ \nLicense: Attribution NonCommercial 4.0"
+  m_text: '<b>2D & 3D Artists</b>
+
+    Serena Fontanesi
+
+    Sabrina Luciano
+
+    Teresa
+    Zhang
+
+    Simone Oldani
+
+    Diego Dall''Agata
+
+
+    <b>Game Developers</b>
+
+    <link="https://linktr.ee/reflexivefox"><color=#3A86FF><u>Lorenzo
+    Petraroli</color></u></link>
+
+    Francesco Luigi Cerulli
+
+
+    <b>Audio Developer</b>
+
+    Giovanni
+    Sarti
+
+
+
+
+
+    <b>Special Thanks</b>
+
+    ITS Academy Olivetti for hosting the
+    Jam
+
+
+    <b>Music by</b>
+
+    <link="https://freesound.org/s/246390/"><color=#3A86FF><u>Chiming
+    Out by FoolBoyMedia</color></u></link>
+
+    License: Attribution NonCommercial
+    4.0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1910,6 +2002,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1799722020}
   m_CullTransparentMesh: 1
+--- !u!114 &1799722024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799722020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4c24e5273597247a85f90981fb5e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameJam.TMPLinkOpener
 --- !u!1 &1820254980
 GameObject:
   m_ObjectHideFlags: 0
@@ -2480,7 +2584,7 @@ PrefabInstance:
       objectReference: {fileID: 2147066428}
     - target: {fileID: 8989123075151109893, guid: 1861bdf553a7792409b78a9e772d04b1, type: 3}
       propertyPath: m_fontSize
-      value: 18
+      value: 72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2629,7 +2733,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6863684600185327531, guid: 4054e09fefe0ae14cadbfd4e58c1c49e, type: 3}
       propertyPath: m_fontSize
-      value: 18
+      value: 53.85
       objectReference: {fileID: 0}
     - target: {fileID: 6964214502040135343, guid: 4054e09fefe0ae14cadbfd4e58c1c49e, type: 3}
       propertyPath: m_Name
@@ -2650,16 +2754,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5887346800948359117, guid: e7bb60cd6412b18449a739952392622a, type: 3}
       propertyPath: m_fontSize
-      value: 18
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 5981526216992897357, guid: e7bb60cd6412b18449a739952392622a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2147066428}
-    - target: {fileID: 5981526216992897357, guid: e7bb60cd6412b18449a739952392622a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadScene
-      objectReference: {fileID: 0}
     - target: {fileID: 8881080446968405033, guid: e7bb60cd6412b18449a739952392622a, type: 3}
       propertyPath: m_Name
       value: PlayBtn
