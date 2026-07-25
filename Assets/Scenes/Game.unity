@@ -1827,10 +1827,6 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 44.75
       objectReference: {fileID: 0}
-    - target: {fileID: 4427510147697647013, guid: 7af12643a1d78d345b52c4a4659a8264, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 68744322}
     - target: {fileID: 4506996695486723757, guid: 7af12643a1d78d345b52c4a4659a8264, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

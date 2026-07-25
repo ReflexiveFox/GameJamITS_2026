@@ -2559,6 +2559,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 147202878053776695, guid: 3daef822c3b0d554799c184cf98cc3f4, type: 3}
     - target: {fileID: 5981526216992897357, guid: e7bb60cd6412b18449a739952392622a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981526216992897357, guid: e7bb60cd6412b18449a739952392622a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: GameJam.GameManager, Assembly-CSharp
       objectReference: {fileID: 0}
